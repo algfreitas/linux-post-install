@@ -55,7 +55,6 @@ apt-get install \
  tk-dev \
  libffi-dev \
  liblzma-dev \
- fonts-firacode \
  virtualbox \
  vlc \
  vagrant \
