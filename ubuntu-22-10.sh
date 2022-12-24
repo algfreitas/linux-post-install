@@ -21,6 +21,7 @@ apt-get -f install -y
 apt-get dist-upgrade -y
 
 apt-get install \
+ ansible \
  cabextract \
  curl \
  ubuntu-restricted-extras \
@@ -57,6 +58,7 @@ apt-get install \
  fonts-firacode \
  virtualbox \
  vlc \
+ vagrant \
  -y
  
 # Install OpenVPN packages for Gnome

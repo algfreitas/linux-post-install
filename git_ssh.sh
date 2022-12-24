@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# Description: Script for enviroment configuration for Pop!_OS 21.04
+# Description: Script for enviroment configuration for git, ssh.
 # Author: Andre L G Freitas
 # Date: 2021/01/20
 
@@ -18,7 +18,7 @@ RUSER_UID=$(id -u ${RUID})
 # Generate SSH Key for git
 sudo -u $SUDO_USER ssh-keygen -q -t rsa -N '' -f /home/$SUDO_USER/.ssh/id_rsa
 clear
-echo "Abra https://bitbucket.org/account/settings/ssh-keys/ no seu browser e faça a adição da chave acima."
+echo "Sua chave."
 echo ""
 cat /home/$SUDO_USER/.ssh/id_rsa.pub
 echo ""
