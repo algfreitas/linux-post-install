@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # Description: Script for enviroment configuration for Ubuntu 22.10+
 # Author: André L G Freitas
-# Date: 2022/22/12
+# Date: 2023/21/04
 
 # Verify for sudo/root execution
 if [ "$EUID" -ne 0 ]
@@ -26,8 +26,8 @@ apt-get install \
  curl \
  ubuntu-restricted-extras \
  p7zip-full \
- openjdk-19-jre \
- openjdk-19-jdk \
+ default-jre \
+ default-19-jdk \
  git \
  git-flow \
  docker.io \
@@ -38,25 +38,9 @@ apt-get install \
  zram-config \
  build-essential \
  dkms \
- perl \
  wget \
  gcc \
  make \
- default-libmysqlclient-dev \
- libssl-dev \
- zlib1g-dev \
- libbz2-dev \
- libreadline-dev \
- libsqlite3-dev \
- llvm \
- libncurses5-dev \
- libncursesw5-dev \
- xz-utils \
- tk-dev \
- libffi-dev \
- liblzma-dev \
- virtualbox \
- vlc \
  vagrant \
  -y
  
@@ -77,20 +61,10 @@ apt-get install \
 # pyenv install
 curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash  
 
-# Install Discord
-wget --no-check-certificate "https://discord.com/api/download?platform=linux&format=deb" -O discord.deb
-dpkg -i discord.deb
-rm -Rf discord.deb
-
 # Install Google Chrome
 wget --no-check-certificate "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" -O chrome.deb
 dpkg -i chrome.deb
 rm -Rf chrome.deb
-
-# Install VSCode
-wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" -O vscode.deb
-dpkg -i vscode.deb
-rm -Rf vscode.deb
 
 # Install OpenLens
 wget "https://github.com/MuhammedKalkan/OpenLens/releases/download/v$(curl -L -s https://raw.githubusercontent.com/MuhammedKalkan/OpenLens/main/version)/OpenLens-$(curl -L -s https://raw.githubusercontent.com/MuhammedKalkan/OpenLens/main/version).amd64.deb" -O openlens.deb
@@ -120,9 +94,6 @@ usermod -aG docker $SUDO_USER
 
 # Add current user for print group
 usermod -aG lpadmin $SUDO_USER
-
-# Add current user for vboxuser group
-usermod -aG vboxusers $SUDO_USER
 
 # Fix for IntelliJ/PyCharm
 echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.conf
