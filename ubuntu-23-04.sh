@@ -27,7 +27,7 @@ apt-get install \
  ubuntu-restricted-extras \
  p7zip-full \
  default-jre \
- default-19-jdk \
+ default-jdk \
  git \
  git-flow \
  docker.io \
