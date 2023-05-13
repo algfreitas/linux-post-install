@@ -1,7 +1,7 @@
 #!/usr/bin/bash
-# Description: Script for enviroment configuration for Fedora 37
+# Description: Script for enviroment configuration for Fedora 38
 # Author: André L G Freitas
-# Date: 2023/01/27
+# Date: 2023/05/12
 
 # Verify for sudo/root execution
 if [ "$EUID" -ne 0 ]
@@ -18,10 +18,6 @@ RUSER_UID=$(id -u ${RUID})
 # DNF
 echo 'max_parallel_downloads=10' | tee -a /etc/dnf/dnf.conf
 echo 'deltarpm=true' | tee -a /etc/dnf/dnf.conf
-
-# Enable RPM Fusion repo
-dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
-dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
 
 # Full system upgrade
 dnf upgrade --refresh -y
