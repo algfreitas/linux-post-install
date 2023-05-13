@@ -89,6 +89,11 @@ curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
 chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 
+# Intall Open Lens.
+wget "https://github.com/MuhammedKalkan/OpenLens/releases/download/v$(curl -L -s https://raw.githubusercontent.com/MuhammedKalkan/OpenLens/main/version)/OpenLens-$(curl -L -s https://raw.githubusercontent.com/MuhammedKalkan/OpenLens/main/version).x86_64.rpm" -O openlens.rpm
+dnf intall openlens.rpm -y
+rm -rf openlens.rpm
+
 # Add current user to Docker group
 usermod -aG docker $SUDO_USER
 
