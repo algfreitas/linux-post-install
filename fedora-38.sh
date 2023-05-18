@@ -34,7 +34,6 @@ dnf install \
  openssh-askpass \
  gnome-extensions-app \
  gnome-tweaks \
- gnome-shell-extension-appindicator \
  flameshot \
  -y
 
@@ -85,10 +84,18 @@ curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
 chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 
+# Install Minikube
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+sudo rpm -Uvh minikube-latest.x86_64.rpm
+rm -rf minikube-latest.x86_64.rpm
+
 # Intall Open Lens.
 wget "https://github.com/MuhammedKalkan/OpenLens/releases/download/v$(curl -L -s https://raw.githubusercontent.com/MuhammedKalkan/OpenLens/main/version)/OpenLens-$(curl -L -s https://raw.githubusercontent.com/MuhammedKalkan/OpenLens/main/version).x86_64.rpm" -O openlens.rpm
 dnf intall openlens.rpm -y
 rm -rf openlens.rpm
+
+# Add helm repo bitnami
+helm repo add bitnami https://charts.bitnami.com/bitnami
 
 # Add current user to Docker group
 usermod -aG docker $SUDO_USER
@@ -100,7 +107,6 @@ usermod -aG lpadmin $SUDO_USER
 update-crypto-policies --set DEFAULT:FEDORA32
 sudo -u $SUDO_USER ssh-keygen -q -t rsa -N '' -f /home/$SUDO_USER/.ssh/id_rsa
 clear
-echo "Abra https://bitbucket.org/account/settings/ssh-keys/ no seu browser e faça a adição da chave acima."
 echo ""
 cat /home/$SUDO_USER/.ssh/id_rsa.pub
 echo ""
