@@ -91,7 +91,7 @@ rm -rf minikube-latest.x86_64.rpm
 
 # Intall Open Lens.
 wget "https://github.com/MuhammedKalkan/OpenLens/releases/download/v$(curl -L -s https://raw.githubusercontent.com/MuhammedKalkan/OpenLens/main/version)/OpenLens-$(curl -L -s https://raw.githubusercontent.com/MuhammedKalkan/OpenLens/main/version).x86_64.rpm" -O openlens.rpm
-dnf intall openlens.rpm -y
+dnf install openlens.rpm -y
 rm -rf openlens.rpm
 
 # Add helm repo bitnami
