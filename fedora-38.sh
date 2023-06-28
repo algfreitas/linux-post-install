@@ -45,6 +45,7 @@ dnf install \
  vagrant \
  docker \
  docker-compose \
+ buildah \
  -y 
 
 # Install Kernel Dev Packages
@@ -93,6 +94,10 @@ rm -rf minikube-latest.x86_64.rpm
 wget "https://github.com/MuhammedKalkan/OpenLens/releases/download/v$(curl -L -s https://raw.githubusercontent.com/MuhammedKalkan/OpenLens/main/version)/OpenLens-$(curl -L -s https://raw.githubusercontent.com/MuhammedKalkan/OpenLens/main/version).x86_64.rpm" -O openlens.rpm
 dnf install openlens.rpm -y
 rm -rf openlens.rpm
+
+# Install CTop.
+sudo wget https://github.com/bcicen/ctop/releases/download/v0.7.7/ctop-0.7.7-linux-amd64 -O /usr/local/bin/ctop
+sudo chmod +x /usr/local/bin/ctop
 
 # Add helm repo bitnami
 helm repo add bitnami https://charts.bitnami.com/bitnami
