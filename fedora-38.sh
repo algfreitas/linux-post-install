@@ -102,6 +102,14 @@ sudo chmod +x /usr/local/bin/ctop
 # Add helm repo bitnami
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
+##########################################################################
+# Install Nvidia Drivers – RPM Fusion Method.
+dnf install akmod-nvidia -y
+
+# You can also install the CUDA driver’s support if required.
+dnf install xorg-x11-drv-nvidia-cuda -y
+###########################################################################
+
 # Add current user to Docker group
 usermod -aG docker $SUDO_USER
 
