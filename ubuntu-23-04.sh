@@ -20,35 +20,40 @@ apt-get update
 apt-get -f install -y
 apt-get dist-upgrade -y
 
+# Install basic packages
 apt-get install \
- ansible \
  cabextract \
  curl \
+ wget \
+ gpg \
+ apt-transport-https \
  ubuntu-restricted-extras \
  p7zip-full \
- default-jre \
- default-jdk \
- git \
- git-flow \
- docker.io \
- docker-compose \
  htop \
  zenity \
  ssh-askpass \
  zram-config \
- build-essential \
- dkms \
- wget \
- gcc \
- make \
+ -y
+
+ # Install Dev packages.
+apt-get install \
+ git \
+ git-flow \
+ ansible \
+ docker.io \
+ docker-compose \
  vagrant \
+ buildah \
+ default-jre \
+ default-jdk \
  -y
  
-# Install OpenVPN packages for Gnome
+# Install Kernel Dev Packages.
 apt-get install \
- network-manager-openvpn \
- network-manager-openvpn-gnome \
- openvpn-systemd-resolved \
+ build-essential \
+ dkms \
+ gcc \
+ make \
  -y
 
 # Install Python dev packages
@@ -61,10 +66,25 @@ apt-get install \
 # pyenv install
 curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash  
 
+# Install OpenVPN packages for Gnome
+apt-get install \
+ network-manager-openvpn \
+ network-manager-openvpn-gnome \
+ openvpn-systemd-resolved \
+ -y
+
 # Install Google Chrome
 wget --no-check-certificate "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" -O chrome.deb
 dpkg -i chrome.deb
 rm -Rf chrome.deb
+
+# Install VSCode.
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
+sudo apt update
+sudo apt install code
 
 # Install OpenLens
 wget "https://github.com/MuhammedKalkan/OpenLens/releases/download/v$(curl -L -s https://raw.githubusercontent.com/MuhammedKalkan/OpenLens/main/version)/OpenLens-$(curl -L -s https://raw.githubusercontent.com/MuhammedKalkan/OpenLens/main/version).amd64.deb" -O openlens.deb
@@ -79,6 +99,9 @@ rm -rf kubectl
 # Install Helm
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
+# Add helm repo bitnami
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
 # Install kubectx and kubectl
 git clone https://github.com/ahmetb/kubectx /opt/kubectx
 ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
@@ -88,6 +111,14 @@ ln -s /opt/kubectx/kubens /usr/local/bin/kubens
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
 chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
+
+# Install Minikube.
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+sudo dpkg -i minikube_latest_amd64.deb
+
+# Install CTop.
+sudo wget https://github.com/bcicen/ctop/releases/download/v0.7.7/ctop-0.7.7-linux-amd64 -O /usr/local/bin/ctop
+sudo chmod +x /usr/local/bin/ctop
 
 # Add current user to Docker group
 usermod -aG docker $SUDO_USER
